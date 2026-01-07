@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AdaptAI by Pulsara | Enterprise AI Chatbot</title>
+  <meta name="description" content="AdaptAI resolves 68% of customer queries autonomously. Enterprise-grade AI chatbot for support, sales, and onboarding."/>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+
+  <!-- AOS Animation Library -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"/>
+
+  <style>
+    :root {
+      --tan: #F5E6D3;
+      --tan-dark: #D4BFA6;
+      --white: #FFFFFF;
+      --gray: #F7F7F7;
+      --text: #2D2D2D;
+      --accent: #8B6F47;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background: var(--white); color: var(--text); line-height: 1.7; }
+
+    header {
+      background: var(--white); box-shadow: 0 4px 12px rgba(0,0,0,0.05); position: fixed; width: 100%; z-index: 1000; transition: all 0.3s;
+    }
+    nav { max-width: 1400px; margin: 0 auto; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 700; font-size: 1.8rem; color: var(--accent); }
+    .logo span { color: var(--text); }
+    .nav-links a { margin-left: 2rem; text-decoration: none; color: var(--text); font-weight: 500; transition: color 0.3s; }
+    .nav-links a:hover { color: var(--accent); }
+
+    .hero { padding: 140px 2rem 100px; background: linear-gradient(135deg, var(--tan) 0%, var(--white) 100%); text-align: center; }
+    .container { max-width: 1200px; margin: 0 auto; }
+    .hero h1 { font-size: 3.5rem; margin-bottom: 1rem; background: linear-gradient(to right, var(--accent), #A67C52); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .hero p { font-size: 1.3rem; max-width: 700px; margin: 0 auto 2rem; color: #555; }
+
+    .btn { display: inline-block; padding: 14px 32px; margin: 0.5rem; border-radius: 50px; font-weight: 600; text-decoration: none; transition: all 0.3s; cursor: pointer; }
+    .btn-primary { background: var(--accent); color: white; }
+    .btn-primary:hover { background: #7A5F3D; transform: translateY(-3px); box-shadow: 0 10px 20px rgba(139, 111, 71, 0.2); }
+    .btn-secondary { background: transparent; color: var(--accent); border: 2px solid var(--accent); }
+    .btn-secondary:hover { background: var(--accent); color: white; }
+
+    .stats { background: var(--gray); padding: 4rem 0; text-align: center; }
+    .stat-item { font-size: 2.8rem; font-weight: 700; color: var(--accent); }
+    .stat-item span { font-size: 1rem; display: block; color: #666; margin-top: 0.5rem; }
+
+    /* NEW: How It Works Section */
+    .how-it-works {
+      padding: 6rem 2rem;
+      background: white;
+    }
+    .how-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2.5rem;
+      margin-top: 3rem;
+    }
+    .how-card {
+      text-align: center;
+      padding: 2rem;
+    }
+    .how-card .icon {
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+      display: block;
+    }
+    .how-card h3 {
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+      color: var(--accent);
+    }
+
+    .features { padding: 6rem 2rem; background: white; }
+    .section-title { text-align: center; font-size: 2.5rem; margin-bottom: 3rem; color: var(--text); }
+    .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+    .feature-card { background: var(--white); padding: 2rem; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); text-align: center; transition: transform 0.3s; }
+    .feature-card:hover { transform: translateY(-10px); }
+    .feature-card i { font-size: 3rem; color: var(--accent); margin-bottom: 1rem; }
+
+    .pricing { padding: 6rem 2rem; background: var(--tan); }
+    .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 3rem; }
+    .price-card { background: white; border-radius: 20px; padding: 2.5rem; text-align: center; box-shadow: 0 15px 35px rgba(0,0,0,0.08); transition: all 0.3s; position: relative; overflow: hidden; }
+    .price-card.popular { transform: scale(1.05); border: 3px solid var(--accent); }
+    .price-card.popular::before { content: "MOST POPULAR"; position: absolute; top: 0; right: -40px; background: var(--accent); color: white; padding: 5px 50px; font-size: 0.8rem; font-weight: 600; transform: rotate(45deg); }
+    .price-header h3 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+    .price { font-size: 3rem; font-weight: 700; color: var(--accent); }
+    .price span { font-size: 1rem; color: #888; }
+    .price-features { list-style: none; margin: 1.5rem 0; }
+    .price-features li { padding: 0.5rem 0; border-bottom: 1px solid #eee; }
+    .price-features li:last-child { border: none; }
+
+    .testimonials { padding: 6rem 2rem; background: white; }
+    .testimonial-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+    .testimonial { background: var(--gray); padding: 2rem; border-radius: 16px; font-style: italic; }
+    .testimonial-author { margin-top: 1rem; font-weight: 600; color: var(--accent); }
+
+    .trust { padding: 3rem 0; background: var(--white); text-align: center; border-top: 1px solid #eee; }
+    .trust img { height: 50px; margin: 0 1rem; opacity: 0.7; }
+
+    .contact { padding: 6rem 2rem; background: var(--gray); }
+    .contact form { max-width: 600px; margin: 0 auto; }
+    .form-group { margin-bottom: 1.5rem; }
+    .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 500; }
+    .form-group input, .form-group textarea { width: 100%; padding: 1rem; border: 1px solid #ddd; border-radius: 8px; font-family: inherit; }
+
+    footer { background: var(--text); color: white; padding: 3rem 2rem; text-align: center; }
+    footer a { color: var(--tan); text-decoration: none; }
+
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 2.5rem; }
+      .nav-links { display: none; }
+      .price-card.popular { transform: none; }
+    }
+  </style>
+  <!--Tab image-->
+  <link rel="icon" type="image/png" href="C:\Users\jaden\OneDrive\Desktop\Pulsara_AdaptAI\Pulsara-logo_tabImage.jpeg">
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <nav>
+      <div class="logo">Pulsara <span>AdaptAI</span></div>
+      <div class="nav-links">
+        <a href="#how">How It Works</a>
+        <a href="#features">Features</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <h1 data-aos="fade-up">AI That Adapts to Your Customers</h1>
+      <p data-aos="fade-up" data-aos-delay="200">
+        AdaptAI resolves <strong>68% of queries autonomously</strong> with human-like understanding. 
+        Reduce support costs by up to <strong>92%</strong>.
+      </p>
+      <div data-aos="fade-up" data-aos-delay="400">
+        <a href="#contact" class="btn btn-primary">Request Demo</a>
+        <a href="#pricing" class="btn btn-secondary">View Pricing</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="stats">
+    <div class="container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 2rem;">
+      <div data-aos="fade-up"><div class="stat-item">68%</div><span>Queries Resolved</span></div>
+      <div data-aos="fade-up" data-aos-delay="100"><div class="stat-item">30s</div><span>Avg. Response</span></div>
+      <div data-aos="fade-up" data-aos-delay="200"><div class="stat-item">92%</div><span>Faster Than Agents</span></div>
+      <div data-aos="fade-up" data-aos-delay="300"><div class="stat-item">24/7</div><span>Always On</span></div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS – NEW SECTION -->
+  <section class="how-it-works" id="how">
+    <div class="container">
+      <h2 class="section-title" data-aos="fade-up">Your AI, Trained on Your Business</h2>
+      <p style="text-align:center; max-width:800px; margin:0 auto 3rem; font-size:1.1rem; color:#444;" data-aos="fade-up" data-aos-delay="100">
+        AdaptAI’s chatbots are more than tools—they’re <strong>intelligent, brand-aligned digital assistants</strong> operating 24/7 across your website and WhatsApp. 
+        By embedding your own custom AI directly into your digital channels, AdaptAI learns from your <strong>public website content in real time</strong>, ensuring every response is accurate, on-brand, and contextually relevant.
+      </p>
+
+      <div class="how-grid">
+        <div class="how-card" data-aos="fade-up" data-aos-delay="200">
+          <span class="icon">🌐</span>
+          <h3>Live Website Sync</h3>
+          <p>Your AI automatically ingests and updates from your public site—no manual uploads. Clients get instant answers from your latest content.</p>
+        </div>
+        <div class="how-card" data-aos="fade-up" data-aos-delay="300">
+          <span class="icon">💬</span>
+          <h3>WhatsApp & Web Widget</h3>
+          <p>Deploy in minutes via a single line of code or WhatsApp Business API. Meet customers where they are—on mobile or desktop.</p>
+        </div>
+        <div class="how-card" data-aos="fade-up" data-aos-delay="400">
+          <span class="icon">🎯</span>
+          <h3>Personalized Journeys</h3>
+          <p>Guide users to products, schedule appointments, simplify FAQs, and deliver tailored recommendations—all reflecting your brand voice.</p>
+        </div>
+        <div class="how-card" data-aos="fade-up" data-aos-delay="500">
+          <span class="icon">🔒</span>
+          <h3>Enterprise Control</h3>
+          <p>You own the data flow. No third-party knowledge bases. Full audit logs, access controls, and compliance-ready architecture.</p>
+        </div>
+      </div>
+
+      <div style="text-align:center; margin-top:3rem;" data-aos="fade-up" data-aos-delay="600">
+        <a href="#contact" class="btn btn-primary">Launch Your AI in 48 Hours</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="features" id="features">
+    <div class="container">
+      <h2 class="section-title" data-aos="fade-up">Why Enterprises Choose AdaptAI</h2>
+      <div class="feature-grid">
+        <div class="feature-card" data-aos="fade-up" data-aos-delay="100"><i>🧠</i><h3>Contextual NLU</h3><p>Understands intent, sentiment, and follow-ups like a human agent.</p></div>
+        <div class="feature-card" data-aos="fade-up" data-aos-delay="200"><i>🔗</i><h3>Seamless Integrations</h3><p>CRM, Slack, Zendesk, Shopify, custom APIs — all in one click.</p></div>
+        <div class="feature-card" data-aos="fade-up" data-aos-delay="300"><i>📊</i><h3>Real-Time Analytics</h3><p>Track resolution rate, CSAT, and ROI with live dashboards.</p></div>
+        <div class="feature-card" data-aos="fade-up" data-aos-delay="400"><i>🔒</i><h3>Enterprise Security</h3><p>SOC 2, GDPR, SSO, end-to-end encryption. Bank-grade.</p></div>
+        <div class="feature-card" data-aos="fade-up" data-aos-delay="500"><i>⚡</i><h3>48-Hour Deployment</h3><p>Go live in 2 days. No dev team required.</p></div>
+        <div class="feature-card" data-aos="fade-up" data-aos-delay="600"><i>🎯</i><h3>Niche-Tuned AI</h3><p>Pre-trained on your industry jargon and workflows.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section class="pricing" id="pricing">
+    <div class="container">
+      <h2 class="section-title" data-aos="fade-up">Simple, Transparent Pricing</h2>
+      <div class="pricing-grid">
+        <div class="price-card" data-aos="fade-up" data-aos-delay="100">
+          <div class="price-header"><h3>Starter</h3><div class="price">R5 151<span>/month</span></div></div>
+          <ul class="price-features">
+            <li>1,000 conversations/mo</li><li>Email + web widget</li><li>Basic analytics</li><li>1 integration</li><li>Email support</li>
+          </ul>
+          <a href="#contact" class="btn btn-secondary">Get Started</a>
+          <p style="margin-top:1rem; font-size:0.9rem; color:#888;">Setup: $2,500</p>
+        </div>
+
+        <div class="price-card popular" data-aos="fade-up" data-aos-delay="200">
+          <div class="price-header"><h3>Pro</h3><div class="price">R13 767<span>/month</span></div></div>
+          <ul class="price-features">
+            <li>5,000 conversations/mo</li><li>Live handoff + branding</li><li>Advanced analytics</li><li>3 integrations</li><li>Priority support</li><li>Weekly reports</li>
+          </ul>
+          <a href="#contact" class="btn btn-primary">Most Popular</a>
+          <p style="margin-top:1rem; font-size:0.9rem; color:#888;">Setup: $4,000</p>
+        </div>
+
+        <div class="price-card" data-aos="fade-up" data-aos-delay="300">
+          <div class="price-header"><h3>Enterprise</h3><div class="price">R34 000+<span>/month</span></div></div>
+          <ul class="price-features">
+            <li>Unlimited conversations</li><li>Custom NLU training</li><li>SSO, SOC 2, API</li><li>White-label domain</li><li>Dedicated manager</li><li>99.9% uptime SLA</li>
+          </ul>
+          <a href="#contact" class="btn btn-secondary">Contact Sales</a>
+          <p style="margin-top:1rem; font-size:0.9rem; color:#888;">Setup: $7,500+</p>
+        </div>
+      </div>
+      <p style="text-align:center; margin-top:2rem; color:#666;" data-aos="fade-up">
+        <strong>Overage:</strong> $0.06 per extra conversation | 
+        <strong>Annual:</strong> 2 months free | 
+        <strong>Pilot:</strong> 50% off month 1
+      </p>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="testimonials">
+    <div class="container">
+      <h2 class="section-title" data-aos="fade-up">Trusted by Industry Leaders</h2>
+      <div class="testimonial-grid">
+        <div class="testimonial" data-aos="fade-up" data-aos-delay="100">
+          <p>"AdaptAI cut our ticket volume by 68% in week one. Best ROI we've seen in years."</p>
+          <div class="testimonial-author">— Sarah Chen, Head of Support, TechFlow</div>
+        </div>
+        <div class="testimonial" data-aos="fade-up" data-aos-delay="200">
+          <p>"Deployed in 48 hours. Our CSAT jumped from 82% to 96%. Incredible."</p>
+          <div class="testimonial-author">— Mark Rivera, CX Director, NovaHealth</div>
+        </div>
+        <div class="testimonial" data-aos="fade-up" data-aos-delay="300">
+          <p>"Finally, an AI that understands medical jargon. Game-changer for compliance."</p>
+          <div class="testimonial-author">— Dr. Lisa Park, Clinic Operations</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust Badges -->
+  <section class="trust">
+    <div class="container">
+      <img src="https://cdn-icons-png.flaticon.com/512/888/888859.png" alt="SOC 2">
+      <img src="https://cdn-icons-png.flaticon.com/512/732/732223.png" alt="GDPR">
+      <img src="https://cdn-icons-png.flaticon.com/512/2965/2965358.png" alt="SSL">
+      <img src="https://cdn-icons-png.flaticon.com/512/888/888870.png" alt="HIPAA">
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="contact" id="contact">
+  <div class="container">
+    <h2 class="section-title" data-aos="fade-up">Get Your Free 14-Day Pilot</h2>
+
+    <form id="contactForm" data-aos="fade-up" data-aos-delay="200">
+      <input type="hidden" name="subject" value="Demo Request from Website" />
+
+      <div class="form-group">
+        <label>Name</label>
+        <input type="text" id="name" required />
+      </div>
+      <div class="form-group">
+        <label>Work Email</label>
+        <input type="email" id="email" required />
+      </div>
+      <div class="form-group">
+        <label>Company</label>
+        <input type="text" id="company" required />
+      </div>
+      <div class="form-group">
+        <label>Message (optional)</label>
+        <textarea id="message" rows="4"></textarea>
+      </div>
+
+      <button type="submit" class="btn btn-primary" style="width:100%;">Request Demo</button>
+    </form>
+
+    <p style="text-align:center; margin-top:1rem; color:#666;">
+      Or email us at: <strong>pulsaratemp@gmail.com</strong> | Call: <strong>+27 66 201 9981</strong>
+    </p>
+  </div>
+</section>
+
+<!-- JavaScript to make mailto work reliably -->
+<script>
+  document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault(); // Stop default form submit
+
+    // Get form values
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const company = document.getElementById('company').value.trim();
+    const message = document.getElementById('message').value.trim();
+    const subject = "Demo Request from Website";
+
+    // Build email body
+    let body = `Name: ${name}\n`;
+    body += `Email: ${email}\n`;
+    body += `Company: ${company}\n`;
+    if (message) body += `Message: ${message}\n`;
+
+    // Encode for URL
+    const encodedBody = encodeURIComponent(body);
+    const encodedSubject = encodeURIComponent(subject);
+
+    // Create mailto link
+    const mailtoLink = `mailto:pulsaratemp@gmail.com?subject=${encodedSubject}&body=${encodedBody}`;
+
+    // Try to open email
+    const opened = window.location.href = mailtoLink;
+
+    // Fallback after 1 second (if email doesn't open)
+    setTimeout(() => {
+      if (document.hasFocus()) {
+        alert("Please set up your default email app (Gmail/Outlook) or copy this email:\n\npulsaratemp@gmail.com");
+      } else {
+        // Optional: redirect to thank you
+        window.location.href = "https://pulsara.ai/thanks.html";
+      }
+    }, 1000);
+  });
+</script>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 Pulsara. All rights reserved. | <a href="#">Privacy</a> | <a href="#">Terms</a> | <a href="#">Security</a></p>
+      <p style="margin-top:1rem; font-size:0.9rem;">AdaptAI is a product of <strong>Pulsara</strong> — Enterprise AI for the real world.</p>
+    </div>
+  </footer>
+
+  <!-- AOS + Form Script -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 800, once: true });
+    document.querySelector('form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert('Thank you! We’ll contact you to set up your pilot.');
+    });
+  </script>
+</body>
+</html>
